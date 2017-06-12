@@ -7,7 +7,7 @@ import Control.Concurrent
 
 main :: IO ()
 main = do
-    P.runEffect $ FM.mapIO 10 4 (static FM.Dict) (static f) (P.each [1..10 :: Int]) P.>-> P.P.print
+    P.runEffect $ FM.mapIO 10 4 f (P.each [1..10 :: Int]) P.>-> P.P.print
   where
     f x = do
         threadDelay (100*1000)
