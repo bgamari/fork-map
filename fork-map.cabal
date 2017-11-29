@@ -14,8 +14,12 @@ cabal-version:       >=1.10
 
 library
   exposed-modules:     Control.Concurrent.ForkMap
-                       Control.Concurrent.ForkMap.FifoChannel
+  if !os(windows)
+    exposed-modules:   Control.Concurrent.ForkMap.FifoChannel
                        Control.Concurrent.ForkMap.ForkPipe
+  else
+    cpp-options:       -DWINDOWS
+
   other-extensions:    ScopedTypeVariables,
                        RankNTypes,
                        ConstraintKinds,

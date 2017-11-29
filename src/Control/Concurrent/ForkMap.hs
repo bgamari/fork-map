@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE ConstraintKinds #-}
@@ -27,6 +28,7 @@ map queueDepth nMappers f = mapIO queueDepth nMappers (pure . f)
 mapIO :: forall a b. (Binary a, Binary b)
       => Int -> Int
       -> (a -> IO b) -> Producer a IO () -> Producer b IO ()
+#ifndef WINDOWS
 mapIO queueDepth nMappers f xs =
     liftIO run >>= PC.fromInput
   where
@@ -53,3 +55,7 @@ mapIO queueDepth nMappers f xs =
         link feeder
         link watcher
         return resultIn
+#else
+mapIO _ _ f xs = xs >-> PP.mapM f
+-- Hack for Windows
+#endif
