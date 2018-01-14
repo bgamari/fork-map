@@ -40,7 +40,7 @@ library
 
 executable fork-map-test
   main-is:             Test.hs
-  ghc-options:         -threaded -rtsopts -debug
+  ghc-options:         -threaded -rtsopts
   build-depends:       base,
                        pipes,
                        fork-map
