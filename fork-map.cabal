@@ -28,7 +28,7 @@ library
                        DeriveGeneric,
                        KindSignatures
   build-depends:       base >=4.9 && <4.11,
-                       async >=2.1 && <2.2,
+                       async >=2.1 && <2.3,
                        stm >=2.4 && <2.5,
                        binary >=0.8 && <0.10,
                        pipes-safe >=2.2 && <2.3,
