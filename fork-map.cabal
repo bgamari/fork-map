@@ -27,9 +27,9 @@ library
                        FlexibleContexts,
                        DeriveGeneric,
                        KindSignatures
-  build-depends:       base >=4.9 && <4.12,
+  build-depends:       base >=4.9 && <4.13,
                        async >=2.1 && <2.3,
-                       stm >=2.4 && <2.5,
+                       stm >=2.4 && <2.6,
                        binary >=0.8 && <0.10,
                        pipes-safe >=2.2 && <2.3,
                        pipes-concurrency >=2.0 && <2.1,
