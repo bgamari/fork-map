@@ -72,7 +72,8 @@ instance Exception WorkerFailException
 
 forkPipe :: forall a' a b' b m n r.
             ( MonadIO (Safe.Base n), Safe.MonadSafe n
-            , All Binary a' a b' b r, MonadIO m )
+            , All Binary a' a b' b r
+            , MonadIO m, MonadFail m )
          => (forall x. m x -> IO x)
          -> Proxy a' a b' b m r
          -> n (Proxy a' a b' b n r)
@@ -139,7 +140,7 @@ master rkey recvC sendC = go
     goRespond b' = liftIO (send sendC (MasterDownRequest b')) >> go
 
 worker :: forall a' a b' b m r.
-            ( All Binary a' a b' b r, MonadIO m )
+            ( All Binary a' a b' b r, MonadIO m, MonadFail m )
        => (forall x. m x -> IO x)
        -> Proxy a' a b' b m r
        -> ReceiveChan (InwardMessage a' a b' b r)
