@@ -29,8 +29,9 @@ mapIO :: forall a b. (Binary a, Binary b)
       => Int -> Int
       -> (a -> IO b) -> Producer a IO () -> Producer b IO ()
 #ifndef WINDOWS
-mapIO queueDepth nMappers f xs =
-    liftIO run >>= PC.fromInput
+mapIO queueDepth nMappers f xs = do
+    inp <- liftIO run
+    PC.fromInput inp
   where
     run :: IO (PC.Input b)
     run = do
